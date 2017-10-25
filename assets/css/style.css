@@ -1,0 +1,15 @@
+.jumbotron {
+	background-color: #337ab7;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+.form-control {
+	margin-bottom: 16px;
+}
