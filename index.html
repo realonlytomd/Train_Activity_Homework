@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Train Activity Homework</title>
+	<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -12,7 +13,7 @@
 
 		<div class="jumbotron">
 
-			<h1>Train Times</h1>
+			<span class="headingText"><h1>Train Times</h1></span>
 			<h2>Put 2nd heading here</h2>
 
 		</div>
@@ -30,6 +31,33 @@
  					<div class="panel-body">
 
  						 <table class="table">
+ 						 	
+ 						 	<thead>
+ 						 		
+ 						 		<tr>
+ 						 			<th>Train Name</th>
+ 						 			<th>Destination</th>
+ 						 			<th>Frequency (min)</th>
+ 						 			<th>Next Arrival</th>
+ 						 			<th>Minutes Away</th>
+ 						 		
+ 						 		</tr>
+ 						 	
+ 						 	</thead>
+
+ 						 	<tbody>
+
+								<tr>
+          
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									
+								</tr>
+ 						 		
+ 						 	</tbody>
 
  						 </table>
  						
@@ -57,21 +85,21 @@
  							
  							<label for="usr">Train Name:</label>
  							
- 							<input type="text" class="form-control" id="trainName">
+ 							<input type="text" class="form-control" id="trainName-input">
 
  							<label for="usr">Destination:</label>
  							
- 							<input type="text" class="form-control" id="destination">
+ 							<input type="text" class="form-control" id="destination-input">
 
  							<label for="usr">First Train Time (HH:mm - military time)</label>
  							
- 							<input type="time" class="form-control" id="firstTrainTime">
+ 							<input type="time" class="form-control" id="firstTrainTime-input">
 
  							<label for="usr">Frequency (min)</label>
  							
- 							<input type="number" class="form-control" id="frequency">
+ 							<input type="number" class="form-control" id="frequency-input">
 
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" id="add-train" class="btn btn-primary">Submit</button>
 
  						</div>
  						
