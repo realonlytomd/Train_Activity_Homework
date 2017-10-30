@@ -77,33 +77,33 @@ $(document).ready(function() {
       // add for loop to add table rows
       //for (i = 0, i < 5, i++) {
 
-//just pick the tds in the htmel (which can be gotten rid of since generated
+//just pick the tds in the html (which can be gotten rid of since generated
 //here) then using jQuery, just concatenate in the required tds.
 //  look at when I concatenated in the <p> in that exercise....
 // but use the .append function, so it doesn't overwrite the last row.
 // write the code to write the html needed (<tr>steph</tr>), but append.
-// call in the tbody, then trow, though maybe just what I wan to write in 
+// call in the  trow, though maybe just what I wan to write in 
 // each time.
 
-		var firstRowTds = $("table") // Get a reference to the table 
-			.children() // Get all of table's immediate children as an array
-			.eq(1) // Get element at the first index of this returned array (the <tbody>)
-			.children("tr") // Get an array of all <tr> children inside the returned <tbody>
-			.eq(0) // Get the 0th child of this returned array (the first <tr>)
-			.children("td"); // Get an array of all <td> children inside the returned <tr>
+		// var firstRowTds = $("table") // Get a reference to the table 
+		// 	.children() // Get all of table's immediate children as an array
+		// 	.eq(1) // Get element at the first index of this returned array (the <tbody>)
+		// 	.children("tr") // Get an array of all <tr> children inside the returned <tbody>
+		// 	.eq(0) // Get the 0th child of this returned array (the first <tr>)
+		// 	.children("td"); // Get an array of all <td> children inside the returned <tr>
 
-      // Setting the inner text of each <td> in the firstRowTds array
-		firstRowTds.eq(0).text(snapshot.val().trainName);
+  //     // Setting the inner text of each <td> in the firstRowTds array
+		// firstRowTds.eq(0).text(snapshot.val().trainName);
 
-		firstRowTds.eq(1).text(snapshot.val().destination);
+		// firstRowTds.eq(1).text(snapshot.val().destination);
 
-		firstRowTds.eq(2).text(snapshot.val().frequency);
+		// firstRowTds.eq(2).text(snapshot.val().frequency);
 
-		firstRowTds.eq(3).text(snapshot.val().nextArrival);
+		// firstRowTds.eq(3).text(snapshot.val().nextArrival);
 
-		firstRowTds.eq(4).text(snapshot.val().minAway);
+		// firstRowTds.eq(4).text(snapshot.val().minAway);
 
-//	}
+
 
 
 
