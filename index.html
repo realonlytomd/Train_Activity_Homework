@@ -45,17 +45,9 @@
  						 	
  						 	</thead>
 
- 						 	<tbody>
+ 						 	<!-- add id to this tbody to append the new rows into -->
 
-								<tr>
-          
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									
-								</tr>
+ 						 	<tbody id="tbody-new-row">
  						 		
  						 	</tbody>
 
@@ -91,11 +83,11 @@
  							
  							<input type="text" class="form-control" id="destination-input">
 
- 							<label for="usr">First Train Time (HH:mm - military time)</label>
+ 							<label for="usr">First Train Time (Enter in military time - HH:mm)</label>
  							
- 							<input type="time" class="form-control" id="firstTrainTime-input">
+ 							<input type="text" class="form-control" id="firstTrainTime-input">
 
- 							<label for="usr">Frequency (min)</label>
+ 							<label for="usr">Frequency (minutes)</label>
  							
  							<input type="number" class="form-control" id="frequency-input">
 
@@ -115,6 +107,7 @@
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<script type="text/javascript" src="assets/javascript/app.js"></script>
 
 </body>

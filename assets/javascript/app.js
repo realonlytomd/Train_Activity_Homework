@@ -3,12 +3,12 @@ $(document).ready(function() {
 
 	// Initialize Firebase
   var config = {
-    apiKey: "AIzaSyA4CjnWCZCfOismj1Xu4qdMA6JqgQsjWys",
-    authDomain: "my-train-sched.firebaseapp.com",
-    databaseURL: "https://my-train-sched.firebaseio.com",
-    projectId: "my-train-sched",
-    storageBucket: "my-train-sched.appspot.com",
-    messagingSenderId: "799124966854"
+    apiKey: "AIzaSyDS0tXo7I9gMlvH2QRDb9JNe9dcxDfkCkY",
+    authDomain: "new-train-schedule-homework.firebaseapp.com",
+    databaseURL: "https://new-train-schedule-homework.firebaseio.com",
+    projectId: "new-train-schedule-homework",
+    storageBucket: "new-train-schedule-homework.appspot.com",
+    messagingSenderId: "883959661798"
   };
   firebase.initializeApp(config);
 
@@ -20,7 +20,8 @@ $(document).ready(function() {
     var firstTrainTime = "";
     var frequency = "";
     var nextArrival = "";
-    var minAway = "";   
+    // you just changed this
+    var minAway = 0;   
 
     // capture the submit button click
 
@@ -34,8 +35,65 @@ $(document).ready(function() {
 		destination = $("#destination-input").val().trim();
 		firstTrainTime = $("#firstTrainTime-input").val().trim();
 		frequency = $("#frequency-input").val().trim();
-		nextArrival = "23:32";
-		minAway = "25";
+
+		console.log(trainName);
+		console.log(destination);
+		console.log(firstTrainTime);
+		console.log(frequency);
+		
+		//perform "math" to calculate nextArrival and minAway
+
+		// convert the firstTrainTime from the input string into machine using moment.js
+		// capital HH is used for military time
+		var firstTrainTimeConvert = moment(firstTrainTime, "HH:mm");
+		console.log("firstTrainTimeConvert = " + firstTrainTimeConvert);
+
+		//get the current time - right now! ... and convert and log it in both
+		// machine and HH:mm (military)
+		var timeRightNow = moment();
+		console.log("Current time in machine: " + timeRightNow);
+		console.log("Current time: " + moment(timeRightNow).format("HH:mm"));
+
+		//Now get the difference between these two times in minutes
+		var differenceInTime = moment().diff(moment(firstTrainTimeConvert), "minutes");
+
+		console.log("Difference between first arrival and now in minutes: " + differenceInTime);
+
+		// if difference is a negative number, i.e.
+		// the first arrival is after right now, then
+		// don't do the following, the difference is simply the minutes away
+		// and the next arrival time is the first arrival time.
+
+		if (differenceInTime >= 0) {
+
+
+		// use modulus; take the remainder of (the difference in time (1st train to now)
+		// divided by the frequency of train arrivals), then 
+		// subtract that from the freqency gives
+		// how many minutes to the next train.  really cool.
+		var mathRemainder = differenceInTime % frequency;
+		console.log(mathRemainder + " remainder after modulus");
+		
+		var minAway = frequency - mathRemainder;
+		console.log("Minutes until next train arrival: " + minAway);
+
+    	//  then, add those minutes to right now, and get the time of next arrival
+    	var nextArrivalMinutes = moment().add(minAway, "minutes");
+    	// and convert format to hours and minutes string to display in table
+    	var nextArrival = moment(nextArrivalMinutes).format("HH:mm");
+		console.log("Arrival time of next train: " + nextArrival);
+
+		}
+
+		else {
+
+			// again, if the train's 1st arrival is AFTER right now, then this...
+			minAway = Math.abs(differenceInTime);
+			nextArrival = firstTrainTime;
+			console.log(minAway);
+			console.log(nextArrival);
+		}
+		
 
       //  the "initial load"
 		database.ref().push({
@@ -57,55 +115,50 @@ $(document).ready(function() {
 
 	});
 
-	// Create Firebase "watcher" 
+	// Create Firebase "watcher". Responds when a new input has been made (child)
 	database.ref().on("child_added", function(snapshot) {
 
-      // Print to the console the initial data...
-		console.log(snapshot.val());
+	//      Print to the console the initial data...
+		// console.log(snapshot.val());
 
-      // Then the value of the various variables
-		console.log(snapshot.val().trainName);
-		console.log(snapshot.val().destination);
-		console.log(snapshot.val().firstTrainTime);
-		console.log(snapshot.val().frequency);
-		console.log(snapshot.val().nextArrival);
-		console.log(snapshot.val().minAway);
-      
-		// Need to create the rows in the table...
-      // And change the HTML
+	//      Then the value of the various variables
+		// console.log(snapshot.val().trainName);
+		// console.log(snapshot.val().destination);
+		// console.log(snapshot.val().firstTrainTime);
+		// console.log(snapshot.val().frequency);
+		// console.log(snapshot.val().nextArrival);
+		// console.log(snapshot.val().minAway);
 
-      // add for loop to add table rows
-      //for (i = 0, i < 5, i++) {
+		// make a tr variable for the new row to be put in the tbody
 
-//just pick the tds in the htmel (which can be gotten rid of since generated
-//here) then using jQuery, just concatenate in the required tds.
-//  look at when I concatenated in the <p> in that exercise....
-// but use the .append function, so it doesn't overwrite the last row.
-// write the code to write the html needed (<tr>steph</tr>), but append.
-// call in the tbody, then trow, though maybe just what I wan to write in 
-// each time.
+		var newRow = $("<tr>");
 
-		var firstRowTds = $("table") // Get a reference to the table 
-			.children() // Get all of table's immediate children as an array
-			.eq(1) // Get element at the first index of this returned array (the <tbody>)
-			.children("tr") // Get an array of all <tr> children inside the returned <tbody>
-			.eq(0) // Get the 0th child of this returned array (the first <tr>)
-			.children("td"); // Get an array of all <td> children inside the returned <tr>
+		// then make a variable for each new column value, the td's
 
-      // Setting the inner text of each <td> in the firstRowTds array
-		firstRowTds.eq(0).text(snapshot.val().trainName);
+		var firstTd = $("<td>").text(snapshot.val().trainName);
+		var secondTd = $("<td>").text(snapshot.val().destination);
+		var thirdTd = $("<td>").text(snapshot.val().frequency);
+		var fourthTd = $("<td>").text(snapshot.val().nextArrival);
+		var fifthTd = $("<td>").text(snapshot.val().minAway);
 
-		firstRowTds.eq(1).text(snapshot.val().destination);
+		// console.log(firstTd);
+		// console.log(secondTd);
+		// console.log(thirdTd);
+		// console.log(fourthTd);
+		// console.log(fifthTd);
 
-		firstRowTds.eq(2).text(snapshot.val().frequency);
+		// use .append, to put the column values together in the row
 
-		firstRowTds.eq(3).text(snapshot.val().nextArrival);
+		newRow.append(firstTd);
+		newRow.append(secondTd);
+		newRow.append(thirdTd);
+		newRow.append(fourthTd);
+		newRow.append(fifthTd);
 
-		firstRowTds.eq(4).text(snapshot.val().minAway);
+		//then, use .append again, so it doesn't overwrite the last row.
 
-//	}
-
-
+		$("#tbody-new-row").append(newRow);
+	
 
 		// Create Error Handling
     }, function(errorObject) {
