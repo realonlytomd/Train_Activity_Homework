@@ -1,11 +1,12 @@
 body {
-	background-image: url("../images/metal_net.jpg");
-	/*background-repeat: no-repeat;
-	background-size: cover;*/
+	background-image: url("../images/metal_grate.jpg");
+	/* background-repeat: no-repeat;
+	background-size: cover; */
 }
 
 .jumbotron {
-	background-color: #337ab7;
+	background-color: #686868;
+	margin-top: 20px;
 }
 
 .headingText {
@@ -19,6 +20,18 @@ h1 {
 h2 {
 	color: white;
 	text-align: center;
+}
+
+.panel-primary {
+	border-color: #686868;
+}
+
+#panel-color {
+	background-color: #686868;
+}
+
+#add-train {
+	background-color: #686868;
 }
 
 .form-control {

@@ -20,7 +20,6 @@ $(document).ready(function() {
     var firstTrainTime = "";
     var frequency = "";
     var nextArrival = "";
-    // you just changed this
     var minAway = 0;   
 
     // capture the submit button click
