@@ -1,1 +1,2 @@
-# Train_Activity_Homework
+# Train_Activity_Schedule
+This app takes user inputs of an imaginary train schedule.  It then calculates when the next train arrives based on the current time.  The "meat" of the app is that the data is persistant; it utilizes storage using Firebase. Try it out at: https://realonlytomd.github.io/Train_Activity_Schedule/
